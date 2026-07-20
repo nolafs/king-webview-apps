@@ -1,0 +1,43 @@
+{
+  "name": "candy-crush-season",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/candy-crush-season/src",
+  "tags": ["scope:candy-crush-season", "type:app"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "next build",
+        "cwd": "apps/candy-crush-season"
+      },
+      "outputs": ["{projectRoot}/out"]
+    },
+    "build:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "dotenv -e .env.prod -- next build",
+        "cwd": "apps/candy-crush-season"
+      },
+      "outputs": ["{projectRoot}/out"]
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "next dev",
+        "cwd": "apps/candy-crush-season"
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "dotenv -e .env.prod -- next build",
+          "firebase deploy --only hosting:candy-crush-season"
+        ],
+        "cwd": "apps/candy-crush-season",
+        "sequential": true
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "candy-crush-season"
+  },
+  "targets": {
+    "candy-crush-season": {
+      "hosting": {
+        "candy-crush-season": ["candy-crush-season"]
+      }
+    }
+  }
+}

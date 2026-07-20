@@ -1,0 +1,13 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong.",
+    "retry": "Try again",
+    "locked": "This content is locked.",
+    "back": "Back"
+  },
+  "meta": {
+    "title": "Candy Crush Season",
+    "description": "Play Candy Crush Season events."
+  }
+}

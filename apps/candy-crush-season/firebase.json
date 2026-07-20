@@ -1,0 +1,25 @@
+{
+  "hosting": {
+    "target": "candy-crush-season",
+    "public": "out",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "cleanUrls": true,
+    "trailingSlash": true,
+    "rewrites": [
+      { "source": "/en/**", "destination": "/en/index.html" },
+      { "source": "/de/**", "destination": "/de/index.html" },
+      { "source": "/fr/**", "destination": "/fr/index.html" },
+      { "source": "/es/**", "destination": "/es/index.html" },
+      { "source": "/it/**", "destination": "/it/index.html" },
+      { "source": "/nl/**", "destination": "/nl/index.html" },
+      { "source": "/pl/**", "destination": "/pl/index.html" },
+      { "source": "/ru/**", "destination": "/ru/index.html" },
+      { "source": "/ja/**", "destination": "/ja/index.html" },
+      { "source": "/ko/**", "destination": "/ko/index.html" },
+      { "source": "/zh/**", "destination": "/zh/index.html" },
+      { "source": "/tr/**", "destination": "/tr/index.html" },
+      { "source": "/pt-br/**", "destination": "/pt-br/index.html" },
+      { "source": "/**", "destination": "/en/index.html" }
+    ]
+  }
+}

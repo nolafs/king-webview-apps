@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/nx/schemas/tsconfig-schema.json",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "bundler",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2017",
+    "module": "esnext",
+    "lib": ["ES2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@king/types": ["libs/types/src/index.ts"],
+      "@king/firebase": ["libs/firebase/src/index.ts"],
+      "@king/webview": ["libs/webview/src/index.ts"],
+      "@king/i18n": ["libs/i18n/src/index.ts"],
+      "@king/shared-ui": ["libs/shared-ui/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

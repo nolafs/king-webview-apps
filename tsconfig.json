@@ -1,0 +1,4 @@
+// Root tsconfig is just a pointer — real config is in tsconfig.base.json
+// Each app/lib extends that file.
+{ "files": [], "references": [] }
+

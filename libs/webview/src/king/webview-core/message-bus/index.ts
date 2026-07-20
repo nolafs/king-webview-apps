@@ -1,0 +1,1 @@
+export { createMessageBusAdapter as createMessageBus } from './adapter';
