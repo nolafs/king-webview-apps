@@ -20,7 +20,8 @@
       "@king/firebase": ["libs/firebase/src/index.ts"],
       "@king/webview": ["libs/webview/src/index.ts"],
       "@king/i18n": ["libs/i18n/src/index.ts"],
-      "@king/shared-ui": ["libs/shared-ui/src/index.ts"]
+      "@king/shared-ui": ["libs/shared-ui/src/index.ts"],
+      "@king/cms": ["libs/cms/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
