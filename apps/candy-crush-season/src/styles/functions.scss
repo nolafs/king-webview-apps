@@ -1,0 +1,69 @@
+// =============================================================================
+// Font Face
+// =============================================================================
+
+
+@use "sass:map";
+@use "sass:list";
+@use "sass:string";
+
+
+@mixin font-face(
+  $name,         // The name of the font-family
+  $path,         // The base path to the font files
+  $weight: null, // (Optional) Font weight
+  $style: null,  // (Optional) Font style
+  $exts: eot woff2 woff ttf  otf     // List of font extensions, default to ttf
+) {
+  $src: null;
+
+  // Define modifications specific to certain extensions
+
+  // Define format mappings for the extensions
+  $formats: (
+          woff: "woff",
+          woff2: "woff2",
+          otf: "opentype",
+          ttf: "truetype",
+          svg: "svg",
+          eot: "embedded-opentype"
+  );
+
+  $extmods: (
+          eot: "?",
+  );
+
+  // Loop through all the specified extensions and generate the src
+  @each $ext in $exts {
+    $extmod: $ext;
+    @if map.has-key($extmods, $ext) {
+      $extmod: $ext + map.get($extmods, $ext);
+    }
+
+    $format: "";
+    @if map.has-key($formats, $ext) {
+      $format: map.get($formats, $ext);
+    }
+
+    //$url: string.quote("b64---." + $path + "." + $extmod + "---");
+    $url: string.quote( $path + "." + $extmod);
+    $src: list.append(
+            $src,
+            url($url) format(string.quote($format)),
+            comma
+    );
+  }
+
+  @font-face {
+    font-family: string.quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    font-display: swap;
+    src: $src;
+  }
+}
+
+@function rem-calc($size) {
+  $remSize: $size / 16;
+  @return #{$remSize}rem;
+}

@@ -1,0 +1,398 @@
+@use "sass:list";
+@use "sass:string";
+
+
+@function text-stroke-shadow($r, $g, $b, $stroke-size: 1px, $shadow-offset: 2px) {
+  $stroke: ();
+  $offsets: (
+                  (-$stroke-size, -$stroke-size),
+                  (-$stroke-size, 0),
+                  (-$stroke-size, $stroke-size),
+                  (0, -$stroke-size),
+                  (0, $stroke-size),
+                  ($stroke-size, -$stroke-size),
+                  ($stroke-size, 0),
+                  ($stroke-size, $stroke-size)
+  );
+
+  // Build stroke shadows
+  @each $offset in $offsets {
+    $x: list.nth($offset, 1);
+    $y: list.nth($offset, 2);
+    $stroke: list.append($stroke, string.unquote("#{$x} #{$y} 0px rgb(#{$r} #{$g} #{$b})"), comma);
+  }
+
+  // Add drop shadow (offset from the stroke)
+  $drop-shadow-y: $stroke-size + $shadow-offset;
+  $stroke: list.append($stroke, string.unquote("0px #{$drop-shadow-y} 0px rgb(#{$r} #{$g} #{$b} / 1.00)"), comma);
+
+  // Add glow
+  $stroke: list.append($stroke, string.unquote("0px 0px #{$stroke-size} rgb(#{$r} #{$g} #{$b} / 1.00)"), comma);
+
+  @return $stroke;
+}
+
+
+
+
+  .btn {
+
+    -webkit-filter: drop-shadow(0px 3px 2px rgba(175,6, 72, 1));
+    filter: drop-shadow(0px 3px 2px rgba(175,6, 72, 1));
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap ;
+      padding: 3px;
+    }
+
+    @apply relative isolate flex flex-auto flex-nowrap bg-transparent p-0 border-0  normal-case text-white text-3xl font-header cursor-pointer ;
+    @apply h-[60px]  origin-center w-fit;
+    zoom: 0.8;
+
+    @media (min-width: 24.375rem) {
+      zoom: 1;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        @apply scale-[0.8] xs:scale-100 !important;
+      }
+    }
+
+
+    // Touch + keyboard friendly feedback
+    &:active {
+      @apply scale-[0.8] xs:scale-100 !important;
+    }
+
+    // Keep focus styles intentional (and preferably focus-visible)
+    &:focus-visible {
+      @apply scale-[0.8] xs:scale-100 !important;
+    }
+
+    &.align-center {
+      @apply origin-center;
+    }
+
+    &.align-left {
+      @apply origin-left;
+    }
+
+    &.align-right{
+      @apply origin-right;
+    }
+
+    .btn-left, .btn-right{
+      @apply relative h-[60px] ;
+    }
+
+    .btn-right{
+      @apply w-[28px];
+    }
+
+    .btn-left{
+      @apply w-[28px];
+    }
+
+    .btn-label {
+      @apply relative flex grow justify-center items-center px-0.5 text-right h-[60px];
+
+
+      &:before, &:after {
+        @apply absolute block h-[60px];
+        content: "";
+        background-image: url("../../assets/asset_pink_sides.png");
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+      }
+
+      &:after {
+        @apply w-[30px] -right-[29px];
+        background-position: 100% 0;
+      }
+
+      &:before {
+        @apply w-[27.5px] -left-[25.8px];
+        background-position: 0 50%;
+      }
+
+
+      border: unset !important;
+      background-image: url("../../assets/asset_pink_btn_cta_02.png") ;
+      background-size: 100% 100%;
+      background-repeat: repeat-x;
+
+      img {
+        @apply ml-2 -translate-y-1/2;
+        vertical-align: bottom;
+        margin-top: 10%;
+      }
+
+      span{
+        @apply inline-block -mt-2 font-normal;
+        border: unset !important;
+        text-shadow: text-stroke-shadow(175,6,72, 1px);
+        -webkit-font-smoothing: antialiased !important;
+      }
+    }
+
+
+    &.secondary {
+
+      -webkit-filter: drop-shadow(0px 3px 2px rgba(187,84, 127, 1));
+      filter: drop-shadow(0px 3px 2px rgba(187,84, 127, 1));
+
+      .btn-label {
+
+        &:before, &:after {
+          background-image: url("../../assets/asset_pink2_sides.png");
+        }
+
+        background-image: url("../../assets/asset_pink2_btn_cta_02.png");
+        span {
+          text-shadow: text-stroke-shadow(187,84,127);
+        };
+
+      }
+    }
+
+    &.disabled {
+
+      -webkit-filter: drop-shadow(0px 3px 2px rgba(187,84, 127, 1));
+      filter: drop-shadow(0px 3px 2px rgba(187,84, 127, 1));
+
+      .btn-label {
+
+        span {
+          text-shadow: text-stroke-shadow(187,84,127);
+          @apply opacity-60;
+        }
+
+        &:before, &:after {
+          background-image: url("../../assets/asset_pink2_sides.png");
+        }
+
+        &:after {
+          @apply w-[30px] -right-[28px];
+        }
+
+        &:before {
+          @apply w-[27.5px] -left-[25.5px];
+        }
+
+
+        background-image: url("../../assets/asset_pink2_btn_cta_02.png");
+      }
+    }
+
+    &.social {
+
+      -webkit-filter: drop-shadow(0px 3px 2px rgba(6,87, 233, 1));
+      filter: drop-shadow(0px 3px 2px rgba(6,87, 233, 1));
+
+      .btn-label {
+
+        span {
+          text-shadow: text-stroke-shadow(6, 87, 233);
+
+        }
+
+        &:before, &:after {
+          background-image: url("../../assets/asset_blue_sides.png");
+        }
+
+        &:before {
+          @apply w-[27.5px] -left-[25.5px];
+        }
+
+        background-image: url("../../assets/asset_blue_btn_cta_02.png");
+      }
+    }
+
+    &.green {
+
+      -webkit-filter: drop-shadow(0px 3px 2px rgba(11,125, 25, 1));
+      filter: drop-shadow(0px 3px 2px rgba(11,125, 25, 1));
+
+      .btn-label {
+
+        span {
+          text-shadow: text-stroke-shadow(11,125,25);
+        }
+
+        &:before, &:after {
+          background-image: url("../../assets/asset_green_sides.png");
+        }
+
+        &:after {
+          @apply w-[35.8px] -right-[28px];
+        }
+
+        &:before {
+          @apply w-[27.5px] -left-[25.5px];
+        }
+
+        background-image: url("../../assets/asset_green_btn_cta_02.png");
+      }
+    }
+
+    &.orange {
+
+      .btn-label {
+
+        &:before, &:after {
+          background-image: url("../../assets/asset_orange_sides.png");
+        }
+
+        &:after {
+          @apply w-[35.8px] -right-[28px];
+        }
+
+        &:before {
+          @apply w-[27.5px] -left-[25.5px];
+        }
+
+        background-image: url("../../assets/asset_orange_btn_cta_02.png");
+      }
+    }
+
+    &.grey {
+
+      .btn-label {
+
+        &:before, &:after {
+          background-image: url("../../assets/asset_grey_sides.png");
+        }
+
+        &:after {
+          @apply w-[35.8px] -right-[28px];
+        }
+
+        &:before {
+          @apply w-[27.5px] -left-[25.5px];
+        }
+
+        background-image: url("../../assets/asset_grey_btn_cta_02.png");
+      }
+    }
+
+    &.yellow {
+
+      .btn-label {
+
+        &:before, &:after {
+          background-image: url("../../assets/asset_yellow_sides.png");
+        }
+
+        &:after {
+          @apply w-[35.8px] -right-[28px];
+        }
+
+        &:before {
+          @apply w-[27.5px] -left-[25.5px];
+        }
+
+        background-image: url("../../assets/asset_yellow_btn_cta_02.png");
+      }
+    }
+
+    &.purple {
+
+      -webkit-filter: drop-shadow(0px 3px 2px rgba(127,15, 196, 1));
+      filter: drop-shadow(0px 3px 2px rgba(127,15, 196, 1));
+
+      .btn-label {
+
+        span {
+          text-shadow: text-stroke-shadow(127,15,196);
+        }
+
+        &:before, &:after {
+          background-image: url("../../assets/asset_purple_sides.png");
+        }
+
+        &:before {
+          @apply w-[27.5px] -left-[25.5px];
+        }
+
+        background-image: url("../../assets/asset_purple_btn_cta_02.png");
+      }
+    }
+
+    &.small{
+      @apply h-[40px] scale-100 ;
+
+      .btn-left, .btn-right{
+        @apply h-[40px] ;
+      }
+
+      .btn-right{
+        @apply w-[24px];
+      }
+
+      .btn-left{
+        @apply w-[18px];
+      }
+
+      .btn-label {
+        @apply h-[40px] px-1 text-xl;
+
+        &:before, &:after {
+          @apply h-[40px];
+        }
+
+        &:after {
+          @apply w-[20px] -right-[20px];
+        }
+
+        &:before {
+          @apply w-[20px] -left-[20px];
+        }
+      }
+    }
+
+  }
+
+  .btn-control, .btn-sound {
+    .btn-icon{
+      img {
+        @apply w-[60px] h-[60px];
+      }
+    }
+  }
+
+
+html[lang^="ar"], html[lang^="th"] {
+
+  .btn {
+    .btn-label {
+      span {
+        @apply font-bold;
+      }
+    }
+  }
+
+
+}
+
+
+@keyframes bubble {
+  0% {
+    transform: scaleX(1) scaleY(1) translateZ(0);
+  }
+  50% {
+    transform: scaleX(1.08) scaleY(0.95) translateZ(0);
+  }
+  100% {
+    transform: scaleX(1) scaleY(1) translateZ(0);
+  }
+}
+
+
+
+.ctaAnimation {
+  animation: bubble 1.2s infinite;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.5s;
+}

@@ -2,6 +2,10 @@
 module.exports = {
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-primary)', 'system-ui', 'sans-serif'],
+        header: ['var(--font-header)', 'system-ui', 'sans-serif'],
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

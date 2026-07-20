@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { supportedLanguages } from '@/data/supportedLanguages';
 import initTranslations from '@/lib/i18n/initTranslations';
 import { TranslationProvider } from '@king/i18n';
+import { AppLayout } from '@/components/layout/AppLayout';
 import type { Metadata } from 'next';
 import type { ResourceLanguage } from 'i18next';
 
@@ -44,7 +45,7 @@ export default async function LngLayout({
       namespaces={i18nNamespaces}
       resources={resources as ResourceLanguage}
     >
-      {children}
+      <AppLayout>{children}</AppLayout>
     </TranslationProvider>
   );
 }

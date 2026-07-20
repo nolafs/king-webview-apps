@@ -1,0 +1,29 @@
+@use "./functions";
+
+
+@include functions.font-face("primary", "/fonts/KingRobotoFlex-Regular", null, null, ttf);
+@include functions.font-face("primary-bold", "/fonts/KingRobotoFlex-Bold", null, null, ttf);
+@include functions.font-face("header", "/fonts/BubblegumBliss-Regular", null, null, woff2 woff otf);
+@include functions.font-face("header-ar", "/fonts/NotoKufiArabic-VariableFont_wght", null, null, ttf);
+@include functions.font-face("header-thai", "/fonts/NotoSansThai-Variable", null, null, ttf);
+
+/* Defaults — just the font-face name; fallbacks are added by Tailwind's fontFamily config */
+:root {
+  --font-primary: "primary";
+  --font-primary-bold: "primary-bold";
+  --font-header: "header";
+}
+
+/* Arabic override */
+html[lang^="ar"] {
+  --font-primary: "header-ar";
+  --font-primary-bold: "header-ar";
+  --font-header: "header-ar";
+}
+
+/* Thai override */
+html[lang^="th"] {
+  --font-primary: "header-thai";
+  --font-primary-bold: "header-thai";
+  --font-header: "header-thai";
+}

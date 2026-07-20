@@ -16,10 +16,17 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // App-specific theme tokens — override CSS variables in globals.css
       fontFamily: {
-        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
-        heading: ['var(--font-heading)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-primary)', 'system-ui', 'sans-serif'],
+        header: ['var(--font-header)', 'system-ui', 'sans-serif'],
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            h1: { fontFamily: 'var(--font-header), system-ui, sans-serif' },
+            h2: { fontFamily: 'var(--font-header), system-ui, sans-serif' },
+          },
+        },
       },
     },
   },

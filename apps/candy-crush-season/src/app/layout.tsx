@@ -1,5 +1,5 @@
 import type { Viewport } from 'next';
-import './globals.css';
+import './globals.scss';
 import { WebViewProvider } from '@king/webview';
 import { navigationData } from '@/data/navigation';
 
