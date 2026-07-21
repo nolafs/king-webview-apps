@@ -2,7 +2,9 @@
 import type React from 'react';
 import { useParams } from 'next/navigation';
 import { Header, Footer } from '@king/shared-ui';
-import { useSettings } from '@/lib/hooks/useSettings';
+import { useSettings } from '@king/cms';
+import { cmsConfig } from '@/lib/config';
+import LanguageSelectorSimple from "../../../../../libs/shared-ui/src/components/language-selector-simple";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -10,7 +12,7 @@ interface AppLayoutProps {
 
 export function AppLayout({ children }: AppLayoutProps) {
   const { lng } = useParams<{ lng: string }>();
-  const { settings } = useSettings(lng);
+  const { settings } = useSettings(lng, cmsConfig);
 
   const footerLinks = settings
     ? [
@@ -58,9 +60,21 @@ export function AppLayout({ children }: AppLayoutProps) {
       <main className="flex-1">{children}</main>
       <Footer
         links={footerLinks}
+        primaryColor={ settings?.primary_colour}
         logo={settings?.footer_logo?.location}
         copyright={settings?.footer_copyright_text as string | undefined}
-      />
+      >
+        <div className={'absolute w-full -translate-y-full overflow-hidden h-20'}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 5600" preserveAspectRatio="none" width="100%" height="5600">
+            <path fill={ settings?.primary_colour || '#2e088c'} d="M1600 5600h-1600v-5600c478.538 29.609 998.642 47.815 1600 50v5550z"/>
+          </svg>
+        </div>
+
+        <div className={'mx-auto flex max-w-3xl flex-col items-center gap-4 px-4 py-8 pb-10'}>
+          <LanguageSelectorSimple languages={settings?.languages} />
+        </div>
+
+      </Footer>
     </div>
   );
 }

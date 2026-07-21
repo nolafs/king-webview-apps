@@ -2,7 +2,7 @@
 import type React from 'react';
 import clsx from 'clsx';
 import type { SettingsType } from '@king/types';
-import { LanguageSelectorFlags } from '../components/LanguageSelectorFlags';
+import { LanguageSelectorFlags } from '../components/language-selector-flags';
 import { QuitButton } from '../components/quit-button';
 
 interface HeaderProps {

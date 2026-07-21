@@ -98,6 +98,9 @@ export interface SettingsType {
   social_default_url: string;
   social_default_keys: string;
 
+  primary_colour: string;
+  secondary_colour: string;
+
 
   terms_nav_active: boolean;
   terms_nav_webview_active: boolean;
